@@ -194,7 +194,7 @@ async def extract_latest_posts_on_page(topic_page_url, max_oldness_seconds):
                     try:
                         post_ts = parse_datetime(smalltext_div)
                         if post_ts is not None and is_recent_timestamp(post_ts, max_oldness_seconds):
-                            logging.info(f"\n[Bitcointalk] Found new post = \n\t{post_url}\n\t{post_ts}\n\t{post_text}")
+                            logging.info(f"\n[Bitcointalk] Found new post = \n\t timestamp={post_url}\n\t{post_ts}\n\t{post_text}")
                             posts_dicts.append({"url": post_url, "timestamp": post_ts, "content": post_text })
                         else:                        
                             # logging.info(f"[Bitcointalk] Old post = \n\t{post_url}\n\t{post_ts}")
@@ -262,7 +262,7 @@ async def scrape_bitcointalk_latest_posts(max_oldnesss_seconds, nb_selections)  
                     new_posts_found_dicts, need_to_check_previous_page = await extract_latest_posts_on_page(sorted_page_urls[i], max_oldnesss_seconds)
                     if new_posts_found_dicts is not None and len(new_posts_found_dicts) > 0:
                         for post in new_posts_found_dicts:
-                            post_dict = {"title":main_post_dict['title'], "url":post["url"], "created_at":convert_ts_to_standard_format(post["timestamp"]), "content":post["content"]  }
+                            post_dict = {"title":main_post_dict['title'], "url":post["url"], "created_at":convert_ts_to_standard_format(post["timestamp"]), "content":main_post_dict['title']+" ."+post["content"]  }
                             yield Item(
                                 title=Title(str(post_dict["title"])),
                                 content=Content(str(post_dict["content"])),
