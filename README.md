@@ -1,4 +1,3 @@
-# TradingView recent ideas scraper
-Scrapes public tradingview ideas, slowly and respectfully.
-Doesn't store or distribute the content itself, only look at keywords, topics and sentiment.
-No personal data is collected, never!
+# BitcoinTalk
+Scrapes [BitcoinTalk](https://bitcointalk.org/) respectfully, with no personal data saved, stored, or distributed.
+Thank you, satoshi
