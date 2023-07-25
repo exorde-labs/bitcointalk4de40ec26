@@ -27,7 +27,8 @@ async def fetch_page(session, url):
         return await response.text()
 
 async def extract_all_urls(root_url):
-    async with aiohttp.ClientSession() as session:
+    timeout=aiohttp.ClientTimeout(total=25)
+    async with aiohttp.ClientSession(timeout=timeout) as session:
         response_text = await fetch_page(session, root_url)
         soup = BeautifulSoup(response_text, "html.parser")
         all_links = soup.find_all("a", href=True)
@@ -76,7 +77,8 @@ def parse_datetime(input_string):
 
 
 async def extract_topics(board_url):
-    async with aiohttp.ClientSession() as session:
+    timeout=aiohttp.ClientTimeout(total=25)
+    async with aiohttp.ClientSession(timeout=timeout) as session:
         response_text = await fetch_page(session, board_url)
         soup = BeautifulSoup(response_text, "html.parser")
 
@@ -141,7 +143,8 @@ def extract_main_post_data(soup):
 
 
 async def extract_pages_on_topic(topic_url):
-    async with aiohttp.ClientSession() as session:
+    timeout=aiohttp.ClientTimeout(total=25)
+    async with aiohttp.ClientSession(timeout=timeout) as session:
         response_text = await fetch_page(session, topic_url)
         soup = BeautifulSoup(response_text, "html.parser")
 
@@ -174,7 +177,8 @@ def convert_ts_to_standard_format(ts):
 
 
 async def extract_latest_posts_on_page(topic_page_url, max_oldness_seconds):
-    async with aiohttp.ClientSession() as session:
+    timeout=aiohttp.ClientTimeout(total=25)
+    async with aiohttp.ClientSession(timeout=timeout) as session:
         response_text = await fetch_page(session, topic_page_url)
         soup = BeautifulSoup(response_text, "html.parser")
 
